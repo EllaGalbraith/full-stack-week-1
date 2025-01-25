@@ -8,7 +8,7 @@
 
 <div class="row panel panel-default">
     <div class="col-xs-12 panel-body">
-        <a href="#" 
+        <!-- <a href="#" 
         class="list-group-item clearfix"
         *ngFor="let contact of contacts" >
             <div class="pull-left">
@@ -17,7 +17,11 @@
             <span class="pull-right">
                 <img [src]="contact.imageUrl"  alt="{{ contact.name }}" class="img-responsive" style="max-height: 50px;">
             </span>
-        </a>
+        </a> -->
+        <app-contact-item 
+        *ngFor="let contactEl of contacts" 
+        [contact]="contactEl"
+        (click)="onSelected(contactEl)"></app-contact-item>
     </div>
 </div>
 </div>

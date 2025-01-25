@@ -1,8 +1,8 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3>{{ detail.name }}</h3>
+        <h3>{{ contact.name }}</h3>
         <div>
-            <img [src]="detail.imageUrl" alt="{{ detail.name }}" class="img-responsive" style="max-height: 100px;">
+            <img [src]="contact.imageUrl" alt="{{ contact.name }}" class="img-responsive" style="max-height: 100px;">
             <div>
                 <button class="btn btn-primary">Edit</button>
                 <button class="btn btn-danger">Delete</button>
@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="panel-body">
-        <p><span style="font-weight: bold;">Email: </span>{{ detail.email }}</p>
-        <p><span style="font-weight: bold;">Phone: </span>{{ detail.phone }}</p>
+        <p><span style="font-weight: bold;">Email: </span>{{ contact.email }}</p>
+        <p><span style="font-weight: bold;">Phone: </span>{{ contact.phone }}</p>
     </div>
 </div>
