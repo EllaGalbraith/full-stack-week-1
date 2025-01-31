@@ -1,9 +1,14 @@
 <div class="row">
     <div class="col-md-5">
-        <app-document-list></app-document-list>
+        <app-document-list (selectedDocumentEvent)="selectedDocument = $event"></app-document-list>
     </div>
   
   <div class="col-md-4">
-    <app-document-detail></app-document-detail>
+    <app-document-detail 
+    *ngIf="selectedDocument; infoText"
+    [document]="selectedDocument"></app-document-detail>
+    <ng-template #infoText>
+        <h3>Please select a Document!</h3>
+    </ng-template>
   </div>
 </div>

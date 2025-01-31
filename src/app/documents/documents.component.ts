@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { Document } from './document.model';
+
 @Component({
   selector: 'app-documents',
   standalone: false,
@@ -8,5 +10,6 @@ import { Component } from '@angular/core';
   styleUrl: './documents.component.css'
 })
 export class DocumentsComponent {
+  selectedDocument: Document;
 
 }
