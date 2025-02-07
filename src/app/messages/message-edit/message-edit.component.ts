@@ -1,6 +1,7 @@
-import { Component, ViewChild, EventEmitter, Output, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 
 import { Message } from '../message.model';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-message-edit',
@@ -12,19 +13,16 @@ import { Message } from '../message.model';
 export class MessageEditComponent {
   @ViewChild('subject') subject: ElementRef;
   @ViewChild('msgText') msgText: ElementRef;
-  @Output() addMessageEvent = new EventEmitter<Message>();
   currentSender: string = 'Ella';
 
-  onSendMessage() {
-    const msgSubject = this.subject.nativeElement.value;
-    const msgText = this.msgText.nativeElement.value;
-    const newMessage = new Message(1, msgSubject, msgText, this.currentSender, 'assets/images/ella.jpg', 'null');
-    this.addMessageEvent.emit(newMessage);
-    console.log('Message sent!: ' + msgSubject + ' - ' + msgText);
-    console.log(newMessage);
-    console.log(this.msgText)
-    console.log(this.subject.nativeElement.value)
+  constructor(private messageService: MessageService) { }
 
+
+  onSendMessage() {
+    const subjectValue = this.subject.nativeElement.value;
+    const msgTextValue = this.msgText.nativeElement.value;
+    const newMessage = new Message('1', subjectValue, msgTextValue, this.currentSender);
+    this.messageService.addMessage(newMessage);
   }
 
   onClear() {
