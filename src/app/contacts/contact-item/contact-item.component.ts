@@ -11,5 +11,6 @@ import { Contact } from '../contact.model';
 })
 export class ContactItemComponent {
   @Input() contact: Contact;
+  @Input() index: number;
 
 }

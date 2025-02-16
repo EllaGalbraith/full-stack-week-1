@@ -21,7 +21,7 @@
         <app-contact-item 
         *ngFor="let contactEl of contacts" 
         [contact]="contactEl"
-        (click)="onSelected(contactEl)"></app-contact-item>
+        [index]="contactEl.id"></app-contact-item>
     </div>
 </div>
 </div>

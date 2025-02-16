@@ -4,11 +4,12 @@
     </div>
   
   <div class="col-md-4">
-    <app-document-detail 
+    <!-- <app-document-detail 
     *ngIf="selectedDocument; else infoText"
     [document]="selectedDocument"></app-document-detail>
     <ng-template #infoText>
         <h3>Please select a Document!</h3>
-    </ng-template>
+    </ng-template> -->
+    <router-outlet></router-outlet>
   </div>
 </div>
