@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './contact-list.component.css',
   // providers: [ContactService]
 })
-export class ContactListComponent implements OnInit {
+export class ContactListComponent implements OnInit, OnDestroy {
 
   contacts: Contact[];
   subscription: Subscription;
@@ -32,6 +32,12 @@ export class ContactListComponent implements OnInit {
         this.contacts = contactsList;
       }
     );
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }
