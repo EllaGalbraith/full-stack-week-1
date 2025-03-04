@@ -7,7 +7,11 @@
 </div>
 
 <div class="row panel panel-default">
-    <div class="col-xs-12 panel-body">
+    <div class="col-xs-12 panel-body" 
+    cdkDropList
+    #contactList="cdkDropList"
+    [cdkDropListData]="contacts"
+    [cdkDropListConnectedTo]="['groupList']">
         <!-- <a href="#" 
         class="list-group-item clearfix"
         *ngFor="let contact of contacts" >
@@ -18,10 +22,13 @@
                 <img [src]="contact.imageUrl"  alt="{{ contact.name }}" class="img-responsive" style="max-height: 50px;">
             </span>
         </a> -->
-        <app-contact-item 
+        <app-contact-item
         *ngFor="let contactEl of contacts" 
         [contact]="contactEl"
-        [index]="contactEl.id"></app-contact-item>
+        [index]="contactEl.id"
+        cdkDrag
+        [cdkDragData]="contactEl"
+        ></app-contact-item>
     </div>
 </div>
 </div>
