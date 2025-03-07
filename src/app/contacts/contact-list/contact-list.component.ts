@@ -16,11 +16,15 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
   contacts: Contact[];
   subscription: Subscription;
+  term: string;
 
   constructor(private contactService: ContactService) { }
 
   ngOnInit() {
-    this.contacts = this.contactService.getContacts();
+    this.contactService.getContacts().subscribe((contacts: Contact[]) => {
+      this.contacts = contacts;
+    });
+    // this.contacts = this.contactService.getContacts();
     // this.contactService.contactChangedEvent
     //   .subscribe(
     //     (contacts: Contact[]) => {
@@ -38,6 +42,10 @@ export class ContactListComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  search(value: string) {
+    this.term = value;
   }
 
 }
