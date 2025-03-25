@@ -22,9 +22,22 @@ export class ContactDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.contact = this.contactService.getContact(params['id']);
+      const id = params['id'];
+      if (!id) {
+        return;
+      }
+      
+      this.contactService.getContact(id).subscribe(contact => {
+        if (!contact) {
+          console.error(`Contact with ID ${id} not found.`);
+          this.router.navigate(['/contacts']); // Redirect if not found
+          return;
+        }
+        this.contact = contact;
+      });
     });
   }
+  
 
   onDelete() {
     this.contactService.deleteContact(this.contact);

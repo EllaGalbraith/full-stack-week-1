@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
 import { Subscription } from 'rxjs';
@@ -9,34 +8,28 @@ import { Subscription } from 'rxjs';
   standalone: false,
   
   templateUrl: './contact-list.component.html',
-  styleUrl: './contact-list.component.css',
-  // providers: [ContactService]
+  styleUrls: ['./contact-list.component.css'],
 })
 export class ContactListComponent implements OnInit, OnDestroy {
 
-  contacts: Contact[];
+  contacts: Contact[] = [];
   subscription: Subscription;
-  term: string;
+  term: string = '';
 
-  constructor(private contactService: ContactService) { }
+  constructor(private contactService: ContactService) {}
 
   ngOnInit() {
-    this.contactService.getContacts().subscribe((contacts: Contact[]) => {
-      this.contacts = contacts;
-    });
-    // this.contacts = this.contactService.getContacts();
-    // this.contactService.contactChangedEvent
-    //   .subscribe(
-    //     (contacts: Contact[]) => {
-    //       this.contacts = contacts;
-    //     }
-    //   );
     this.subscription = this.contactService.contactListChangedEvent.subscribe(
       (contactsList: Contact[]) => {
+        console.log('Contacts received from event:', contactsList);
         this.contacts = contactsList;
       }
     );
+  
+    // Call getContacts to trigger the initial load
+    this.contactService.getContacts().subscribe();
   }
+  
 
   ngOnDestroy() {
     if (this.subscription) {
@@ -48,4 +41,9 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this.term = value;
   }
 
+  get filteredContacts() {
+    return this.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(this.term.toLowerCase())
+    );
+  }
 }
